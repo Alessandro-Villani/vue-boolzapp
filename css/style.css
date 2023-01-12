@@ -1,6 +1,7 @@
 /*! CUSTOM PROPERTIES */
 
 :root{
+    --background-window: rgb(234,234,234);
     --background-main: rgb(219,219,211);
     --background-secondary: rgb(0,150,136);
     --background-tertiary: rgb(142,218,252);
@@ -8,7 +9,81 @@
     --icons-color: rgb(177,177,177);
 }
 
+/*TODO remove - DEBUG */
+
+.debug{
+    border: 1px dashed black;
+}
+
+/*! GENERICS */
+
 body{
     height: 100vh;
+    padding-top: 5vh;
     background-image: linear-gradient(var(--background-secondary) 15%, var(--background-main) 15%, var(--background-main));
 }
+
+.fa-solid{
+    color: var(--icons-color);
+}
+
+
+/*! MAIN */
+
+main{
+    height: 90vh;
+}
+
+main .input-group-text{
+    background-color: white;
+    border: none;
+}
+
+header{
+    background-color: var(--background-window);
+    height: 80px;
+}
+
+footer{
+    background-color: var(--background-window);
+    height: 80px;
+}
+
+    /*# SIDEBAR */
+
+    #sidebar{
+        background-color: white;
+        height: 100%;
+        border-right: 1px solid gray;
+    }
+
+    #sidebar-top{
+        height: 220px;
+    }
+
+    #sidebar-top .input-group{
+        height: calc(100% - 160px);
+        background-color: var(--background-window);
+    }
+
+    #sidebar-bottom{
+        max-height: calc(100% - 220px);
+        overflow-y: auto;
+    }
+
+    .notifications{
+        height: 80px;
+        background-color: var(--background-tertiary);
+    }
+
+    /*# CHAT SECTION */
+
+    .chat-content{
+        height: calc(90vh - 160px);
+        background-image: url(../img/mine.jpg);
+        overflow-y: auto;
+    }
+
+
+
+
