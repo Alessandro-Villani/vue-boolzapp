@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- VUE -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- DATA -->
+    <script src="js/data_milestone1.js"></script>
     <!-- TITLE -->
     <title>Boolzapp</title>
 </head>
@@ -20,11 +22,25 @@
         <div class="row g-0 h-100">
                 <nav id="sidebar" class="col-5 h-100">
                     <div id="sidebar-top">
-                        <header>
-
+                        <header class="px-3 d-flex align-items-center justify-content-between">
+                            <div class="header-left">
+                                <img class="rounded-img me-2" src="img/avatar_io.jpg" alt="io">
+                                <span class="h5">Nome Utente</span>
+                            </div>
+                            <div class="header-right">
+                                <button class="border-0 me-3"><i class="fa-solid fa-circle-notch"></i></button>
+                                <button class="border-0 me-3"><i class="fa-regular fa-message"></i></button>
+                                <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            </div>
                         </header>
-                        <div class="notifications">
-
+                        <div class="notifications d-flex align-items-center px-3">
+                            <div class="rounded-img bg-light d-flex justify-content-center align-items-center me-2">
+                                <i class="fa-regular fa-bell-slash"></i>
+                            </div>
+                            <div class="notification-text">
+                                <p class="mb-0">Ricevi notifiche di nuovi messaggi</p>
+                                <a href="#">Attiva notifiche desktop</a>
+                            </div>
                         </div>
                         <div class="input-group p-2">
                             <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -32,15 +48,36 @@
                         </div>
                     </div>
                     <div id="sidebar-bottom">
-          
+                        
                     </div>
                 </nav>
                 <section id="chat" class="col-7 ">
-                    <header class=""></header>
-                    <div class="chat-content">
-                        
+                    <header class="d-flex align-items-center justify-content-between px-2">
+                        <div class="header-left d-flex">
+                            <img class="rounded-img me-2" src="img/avatar_1.jpg" alt="michele">
+                            <div class="user-info d-flex flex-column justify-content-center">
+                                <p class="mb-0 h5">Michele</p>
+                                <p class="mb-0">Ultimo accesso alle</p>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <button class="border-0 me-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></i></button>
+                            <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </div>
+                    </header>
+                    <div class="chat-content d-flex flex-column p-5">
+                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
+                        <div class="external message rounded-3 align-self-start p-3 mb-2 mw-50">bla</div>
+                        <div class="external message rounded-3 align-self-start p-3 mb-2 mw-50">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam sed ducimus nisi commodi blanditiis quod, ab neque iusto fuga voluptas earum. Sed numquam atque molestiae, quaerat voluptatem iure illo maiores!</div>
+                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
+                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
                     </div>
-                    <footer></footer>
+                    <footer class="d-flex justify-content-around align-items-center px-3">
+                        <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
+                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" aria-label=".form-control-lg example">
+                        <button class="border-0"><i class="fa-solid fa-microphone"></i></button>
+                    </footer>
                 </section>
         </div>
     </main>

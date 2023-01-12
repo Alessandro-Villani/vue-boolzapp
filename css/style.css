@@ -23,8 +23,22 @@ body{
     background-image: linear-gradient(var(--background-secondary) 15%, var(--background-main) 15%, var(--background-main));
 }
 
-.fa-solid{
+i[class^="fa"]{
     color: var(--icons-color);
+}
+
+header i[class^="fa"], footer i[class^="fa"]{
+    font-size: 25px;
+}    
+
+.rounded-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.mw-50{
+    max-width: 50%;
 }
 
 
@@ -36,12 +50,15 @@ main{
 
 main .input-group-text{
     background-color: white;
-    border: none;
 }
 
 header{
     background-color: var(--background-window);
     height: 80px;
+}
+
+header button, footer button{
+    background-color: transparent;
 }
 
 footer{
@@ -76,12 +93,29 @@ footer{
         background-color: var(--background-tertiary);
     }
 
+    .notifications i[class^="fa"]{
+        color: var(--background-tertiary);
+        font-size: 25px;
+    }
+
+    .notification-text a{
+        color: gray;
+    }
+
     /*# CHAT SECTION */
 
     .chat-content{
         height: calc(90vh - 160px);
         background-image: url(../img/mine.jpg);
         overflow-y: auto;
+    }
+
+    .user.message{
+        background-color: var(--background-own-msg);
+    }
+
+    .external.message{
+        background-color: white;
     }
 
 
