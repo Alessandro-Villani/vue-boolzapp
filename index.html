@@ -24,8 +24,8 @@
                     <div id="sidebar-top">
                         <header class="px-3 d-flex align-items-center justify-content-between">
                             <div class="header-left">
-                                <img class="rounded-img me-2" src="img/avatar_io.jpg" alt="io">
-                                <span class="h5">Nome Utente</span>
+                                <img class="rounded-img me-2" :src=" 'img/avatar' + data.user.avatar + '.jpg' " alt="io">
+                                <span class="h5">{{ data.user.name }}</span>
                             </div>
                             <div class="header-right">
                                 <button class="border-0 me-3"><i class="fa-solid fa-circle-notch"></i></button>
@@ -48,7 +48,10 @@
                         </div>
                     </div>
                     <div id="sidebar-bottom">
-                        
+                        <div v-for="contact in data.contacts" class="contact mb-2 d-flex p-3">
+                            <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
+                            <h5>{{ contact.name }}</h5>
+                        </div>
                     </div>
                 </nav>
                 <section id="chat" class="col-7 ">

@@ -83,11 +83,6 @@ footer{
         background-color: var(--background-window);
     }
 
-    #sidebar-bottom{
-        max-height: calc(100% - 220px);
-        overflow-y: auto;
-    }
-
     .notifications{
         height: 80px;
         background-color: var(--background-tertiary);
@@ -102,6 +97,15 @@ footer{
         color: gray;
     }
 
+    #sidebar-bottom{
+        max-height: calc(100% - 220px);
+        overflow-y: auto;
+    }
+
+    #sidebar-bottom .contact:hover{
+        background-color: var(--background-window);
+        cursor: pointer;
+    }
     /*# CHAT SECTION */
 
     .chat-content{
