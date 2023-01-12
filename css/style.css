@@ -1,0 +1,14 @@
+/*! CUSTOM PROPERTIES */
+
+:root{
+    --background-main: rgb(219,219,211);
+    --background-secondary: rgb(0,150,136);
+    --background-tertiary: rgb(142,218,252);
+    --background-own-msg: rgb(213,249,186);
+    --icons-color: rgb(177,177,177);
+}
+
+body{
+    height: 100vh;
+    background-image: linear-gradient(var(--background-secondary) 15%, var(--background-main) 15%, var(--background-main));
+}
