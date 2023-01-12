@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div id="sidebar-bottom">
-                        <div v-for="contact in data.contacts" class="contact mb-2 d-flex p-3">
+                        <div v-for="(contact, i) in data.contacts" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
                             <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
                             <h5>{{ contact.name }}</h5>
                         </div>
@@ -57,9 +57,9 @@
                 <section id="chat" class="col-7 ">
                     <header class="d-flex align-items-center justify-content-between px-2">
                         <div class="header-left d-flex">
-                            <img class="rounded-img me-2" src="img/avatar_1.jpg" alt="michele">
+                            <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="ata.contacts[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
-                                <p class="mb-0 h5">Michele</p>
+                                <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
                                 <p class="mb-0">Ultimo accesso alle</p>
                             </div>
                         </div>
@@ -70,11 +70,10 @@
                         </div>
                     </header>
                     <div class="chat-content d-flex flex-column p-5">
-                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
-                        <div class="external message rounded-3 align-self-start p-3 mb-2 mw-50">bla</div>
-                        <div class="external message rounded-3 align-self-start p-3 mb-2 mw-50">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam sed ducimus nisi commodi blanditiis quod, ab neque iusto fuga voluptas earum. Sed numquam atque molestiae, quaerat voluptatem iure illo maiores!</div>
-                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
-                        <div class="message user rounded-3 p-3 align-self-end mb-2 mw-50">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit unde id velit quisquam voluptatibus, nobis voluptatum corporis deleniti quos tempore pariatur ab. Vel quis sint laboriosam enim assumenda pariatur cum.</div>
+                        <div v-for="(message, i) in data.contacts[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50" :class="isSent(i) ? 'user' : 'external'  ">
+                            <p class="mb-1">{{ message.text }}</p>
+                            <time class="float-end">{{ message.date }}</time>
+                        </div>
                     </div>
                     <footer class="d-flex justify-content-around align-items-center px-3">
                         <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
