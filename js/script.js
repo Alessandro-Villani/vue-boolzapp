@@ -25,7 +25,7 @@ const app = Vue.createApp({
                 status: 'sent'
             }
             this.data.contacts[this.currentIndex].messages.push(message);
-            this.scrollToBottom(this.$refs.chat, 200);
+            this.scrollToBottom(this.$refs.chat, 20);
             this.receiveMessage();
             this.clearMessageField();
         },
@@ -37,7 +37,7 @@ const app = Vue.createApp({
                     status: 'received'
                 }
                 this.data.contacts[this.currentIndex].messages.push(message);
-                this.scrollToBottom(this.$refs.chat, 200);
+                this.scrollToBottom(this.$refs.chat, 20);
             }, 1000);
         },
         clearMessageField(){
