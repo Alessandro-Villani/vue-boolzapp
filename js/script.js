@@ -60,6 +60,7 @@ const app = Vue.createApp({
         },
         deleteMessage(i){
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
+            this.toggleDropdown(i);
         },
         filteredNames(){
             this.data.contacts.forEach(contact => {
