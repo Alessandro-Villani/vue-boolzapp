@@ -9,13 +9,6 @@ const app = Vue.createApp({
             searchField: '',
            }
     },
-    computed:{
-        filteredNames(){
-            return this.data.contacts.filter(contact => {
-                return contact.name.toLowerCase().includes(this.searchField.toLowerCase());
-            })
-        }
-    },
     methods:{
         selectContact(i){
             console.log('click')
@@ -67,8 +60,13 @@ const app = Vue.createApp({
         },
         deleteMessage(i){
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
+        },
+        filteredNames(){
+            this.data.contacts.forEach(contact => {
+               contact.visible = contact.name.toLowerCase().includes(this.searchField.toLowerCase())
+            })
         }
-    }
+    },
 });
 
 app.mount('#root');

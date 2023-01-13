@@ -50,14 +50,16 @@
                         <!--+ SEARCH -->
                         <div class="input-group p-2">
                             <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" class="form-control border-0" placeholder="Cerca o inizia una nuova chat" v-model.trim="searchField">
+                            <input type="text" class="form-control border-0" placeholder="Cerca o inizia una nuova chat" v-model.trim="searchField" @keyup="filteredNames()">
                         </div>
                     </div>
                     <!--# SIDEBAR BOTTOM -->
                     <div id="sidebar-bottom">
-                        <div v-for="(contact, i) in filteredNames" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
+                        <div v-for="(contact, i) in data.contacts">
+                        <div v-if="contact.visible" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
                             <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
                             <h5>{{ contact.name }}</h5>
+                        </div>
                         </div>
                     </div>
                 </nav>
@@ -67,9 +69,9 @@
                     <!--# CHAT HEADER -->
                     <header class="d-flex align-items-center justify-content-between px-2">
                         <div class="header-left d-flex">
-                            <img class="rounded-img me-2" :src="'img/avatar' + filteredNames[currentIndex].avatar + '.jpg'" alt="filteredNames[currentIndex].name">
+                            <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="data.contacts[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
-                                <p class="mb-0 h5">{{ filteredNames[currentIndex].name }}</p>
+                                <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
                                 <p class="mb-0">Ultimo accesso alle</p>
                             </div>
                         </div>
@@ -81,7 +83,7 @@
                     </header>
                     <!--# CHAT -->
                     <div ref="chat" class="chat-content d-flex flex-column p-5">
-                        <div v-for="(message, i) in filteredNames[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50 shadow" :class="isSent(i) ? 'user' : 'external'">
+                        <div v-for="(message, i) in data.contacts[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50 shadow" :class="isSent(i) ? 'user' : 'external'">
                             <i class="fa-solid fa-chevron-down" @click="toggleDropdown(i)" ></i>
                             <p class="mb-1">{{ message.text }}</p>
                             <time class="float-end">{{ message.date }}</time>
