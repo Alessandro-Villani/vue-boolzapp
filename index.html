@@ -19,9 +19,13 @@
 </head>
 <body>
     <main id="root" class="container">
-        <div class="row g-0 h-100">
+        <div class="row g-0 h-100 shadow">
+
+                <!--! SIDEBAR -->
                 <nav id="sidebar" class="col-5 h-100">
+                    <!--# SIDEBAR TOP -->
                     <div id="sidebar-top">
+                        <!--+ HEADER -->
                         <header class="px-3 d-flex align-items-center justify-content-between">
                             <div class="header-left">
                                 <img class="rounded-img me-2" :src=" 'img/avatar' + data.user.avatar + '.jpg' " alt="io">
@@ -33,6 +37,7 @@
                                 <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                             </div>
                         </header>
+                        <!--+ NOTIFICATIONS -->
                         <div class="notifications d-flex align-items-center px-3">
                             <div class="rounded-img bg-light d-flex justify-content-center align-items-center me-2">
                                 <i class="fa-regular fa-bell-slash"></i>
@@ -42,11 +47,13 @@
                                 <a href="#">Attiva notifiche desktop</a>
                             </div>
                         </div>
+                        <!--+ SEARCH -->
                         <div class="input-group p-2">
                             <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input type="text" class="form-control border-0" placeholder="Cerca o inizia una nuova chat" v-model.trim="searchField">
                         </div>
                     </div>
+                    <!--# SIDEBAR BOTTOM -->
                     <div id="sidebar-bottom">
                         <div v-for="(contact, i) in filteredNames" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
                             <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
@@ -54,12 +61,15 @@
                         </div>
                     </div>
                 </nav>
+
+                <!--! CHAT SECTION -->
                 <section id="chat" class="col-7 ">
+                    <!--# CHAT HEADER -->
                     <header class="d-flex align-items-center justify-content-between px-2">
                         <div class="header-left d-flex">
-                            <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="ata.contacts[currentIndex].name">
+                            <img class="rounded-img me-2" :src="'img/avatar' + filteredNames[currentIndex].avatar + '.jpg'" alt="filteredNames[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
-                                <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
+                                <p class="mb-0 h5">{{ filteredNames[currentIndex].name }}</p>
                                 <p class="mb-0">Ultimo accesso alle</p>
                             </div>
                         </div>
@@ -69,12 +79,20 @@
                             <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         </div>
                     </header>
+                    <!--# CHAT -->
                     <div ref="chat" class="chat-content d-flex flex-column p-5">
-                        <div v-for="(message, i) in data.contacts[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50" :class="isSent(i) ? 'user' : 'external'  ">
+                        <div v-for="(message, i) in filteredNames[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50 shadow" :class="isSent(i) ? 'user' : 'external'">
+                            <i class="fa-solid fa-chevron-down" @click="toggleDropdown(i)" ></i>
                             <p class="mb-1">{{ message.text }}</p>
                             <time class="float-end">{{ message.date }}</time>
+                            <div :id="`dropdown_${i}`" class="popup rounded-2 text-center shadow d-none">
+                                <p class="p-3 m-0 rounded-top" @click="deleteMessage(i)" >DELETE MESSAGE</p>
+                                <hr class="m-0">
+                                <p class="p-3 m-0 rounded-bottom">MESSAGE INFO</p>
+                            </div>
                         </div>
                     </div>
+                    <!--# CHAT FOOTER -->
                     <footer class="d-flex justify-content-around align-items-center px-3">
                         <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
                         <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage">

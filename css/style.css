@@ -119,6 +119,11 @@ footer{
         overflow-y: auto;
     }
 
+    .message{
+        cursor: pointer;
+        position: relative;
+    }
+
     .message time{
         font-size: 10px;
     }
@@ -131,6 +136,38 @@ footer{
     .external.message{
         background-color: white;
         align-self: flex-start;
+    }
+
+    .message:hover .fa-chevron-down{
+        opacity: 1;
+    }
+
+    .fa-chevron-down{
+        position: absolute;
+        opacity: 0;
+        transition: opacity, 0.2s;
+        font-size: 12px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .popup{
+        position: absolute;
+        top: 20px;
+        right: 5px;
+        width: 150px;
+        background-color: var(--background-window);
+        cursor: pointer;
+        z-index: 1;
+        font-size: 12px;
+    }
+
+    .popup p{
+        transition: background-color, 0.5s;
+    }
+
+    .popup p:hover{
+        background-color: rgba(0, 0, 0, 0.2);
     }
 
 

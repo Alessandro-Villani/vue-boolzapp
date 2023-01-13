@@ -7,7 +7,7 @@ const app = Vue.createApp({
             currentIndex: 0,
             newMessage: '',
             searchField: '',
-        }
+           }
     },
     computed:{
         filteredNames(){
@@ -57,8 +57,16 @@ const app = Vue.createApp({
             }, timeout)
             
         },
-        userSearch(){
-
+        toggleDropdown(i){
+            const id = `dropdown_${i}`;
+            console.log(id);
+            const dropDown = document.getElementById(id);
+            console.log(dropDown);
+            dropDown.classList.toggle('d-none');
+            
+        },
+        deleteMessage(i){
+            this.data.contacts[this.currentIndex].messages.splice(i, 1);
         }
     }
 });
