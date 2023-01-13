@@ -72,12 +72,12 @@
                             <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="data.contacts[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
                                 <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
-                                <p class="mb-0">Ultimo accesso alle</p>
+                                <p class="mb-0">Ultimo accesso alle {{ data.contacts[currentIndex].messages[data.contacts[currentIndex].messages.length - 1].date}}</p>
                             </div>
                         </div>
                         <div class="header-right">
                             <button class="border-0 me-3"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></i></button>
+                            <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
                             <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                         </div>
                     </header>
