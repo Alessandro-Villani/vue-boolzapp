@@ -7,6 +7,7 @@ const app = Vue.createApp({
             currentIndex: 0,
             newMessage: '',
             searchField: '',
+            lastSeen: ''
            }
     },
     methods:{
@@ -14,6 +15,7 @@ const app = Vue.createApp({
             console.log('click')
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
+            this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
         },
         isSent(i){
             return this.data.contacts[this.currentIndex].messages[i].status === 'sent'
@@ -31,6 +33,7 @@ const app = Vue.createApp({
             this.clearMessageField();
         },
         receiveMessage(){
+            this.lastSeen = 'Sta Scrivendo...'
             setTimeout(() => {
                 const message = {
                     date: new Date().toLocaleString(),
@@ -39,6 +42,7 @@ const app = Vue.createApp({
                 }
                 this.data.contacts[this.currentIndex].messages.push(message);
                 this.scrollToBottom(this.$refs.chat, 20);
+                this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
             }, 1000);
         },
         clearMessageField(){
@@ -66,8 +70,21 @@ const app = Vue.createApp({
             this.data.contacts.forEach(contact => {
                contact.visible = contact.name.toLowerCase().includes(this.searchField.toLowerCase())
             })
-        }
+        },
+        dateToHours(index){
+            const actualDate = this.data.contacts[index].messages[this.data.contacts[index].messages.length - 1].date;
+            console.log(typeof(actualDate));
+            const splitDate = actualDate.split(' ');
+            console.log(splitDate);
+            const splitHour = splitDate[1].split(':');
+            console.log(splitHour);
+            return splitHour[0] + ':' + splitHour[1];
+          }
+        
     },
+    mounted() {
+        this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+    }
 });
 
 app.mount('#root');
