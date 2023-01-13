@@ -44,11 +44,11 @@
                         </div>
                         <div class="input-group p-2">
                             <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" class="form-control border-0" placeholder="Username" aria-label="Cerca o inizia una nuova chat" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control border-0" placeholder="Cerca o inizia una nuova chat" v-model.trim="searchField">
                         </div>
                     </div>
                     <div id="sidebar-bottom">
-                        <div v-for="(contact, i) in data.contacts" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
+                        <div v-for="(contact, i) in filteredNames" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
                             <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
                             <h5>{{ contact.name }}</h5>
                         </div>

@@ -5,7 +5,15 @@ const app = Vue.createApp({
         return{
             data,
             currentIndex: 0,
-            newMessage: ''
+            newMessage: '',
+            searchField: '',
+        }
+    },
+    computed:{
+        filteredNames(){
+            return this.data.contacts.filter(contact => {
+                return contact.name.toLowerCase().includes(this.searchField.toLowerCase());
+            })
         }
     },
     methods:{
@@ -48,6 +56,9 @@ const app = Vue.createApp({
                 item.scrollTop = item.scrollHeight;
             }, timeout)
             
+        },
+        userSearch(){
+
         }
     }
 });
