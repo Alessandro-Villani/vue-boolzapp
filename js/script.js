@@ -60,7 +60,6 @@ const app = Vue.createApp({
             const dropDown = document.getElementById(id);
             console.log(dropDown);
             dropDown.classList.toggle('d-none');
-            
         },
         deleteMessage(i){
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
@@ -72,6 +71,7 @@ const app = Vue.createApp({
             })
         },
         dateToHours(index){
+            if (this.data.contacts[index].messages.length > 0){
             const actualDate = this.data.contacts[index].messages[this.data.contacts[index].messages.length - 1].date;
             console.log(typeof(actualDate));
             const splitDate = actualDate.split(' ');
@@ -79,7 +79,14 @@ const app = Vue.createApp({
             const splitHour = splitDate[1].split(':');
             console.log(splitHour);
             return splitHour[0] + ':' + splitHour[1];
-          }
+        }
+          },
+        getMessage(i){
+            return this.data.contacts[i].messages.length > 0 ? this.data.contacts[i].messages[this.data.contacts[i].messages.length - 1].text : ''
+        },
+        getDate(i){
+            return this.data.contacts[i].messages.length > 0 ? this.data.contacts[i].messages[this.data.contacts[i].messages.length - 1].date : ''
+        }
         
     },
     mounted() {

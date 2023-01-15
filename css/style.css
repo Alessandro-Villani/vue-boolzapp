@@ -111,6 +111,10 @@ footer{
         background-color: var(--background-window);
     }
 
+    #sidebar-bottom .message{
+        font-size: 14px;
+    }
+
     /*# CHAT SECTION */
 
     .chat-content{

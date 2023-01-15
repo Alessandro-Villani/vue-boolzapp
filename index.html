@@ -58,7 +58,13 @@
                         <div v-for="(contact, i) in data.contacts">
                         <div v-if="contact.visible" class="contact d-flex p-3" :class="{ 'selected': currentIndex === i  }" @click="selectContact(i)">
                             <img class="rounded-img me-3" :src=" 'img/avatar' + contact.avatar + '.jpg'" alt="">
-                            <h5>{{ contact.name }}</h5>
+                            <div class="flex-grow-1"> 
+                            <h5 class="mb-1">{{ contact.name }}</h5>
+                            <div v-if="data.contacts[i].messages.length > 0" class="message d-flex justify-content-between align-items-center">
+                                <p class="mb-0">{{ getMessage(i) }}</p>
+                                <time>{{ getDate(i) }}</time>
+                            </div>
+                            </div>
                         </div>
                         </div>
                     </div>
