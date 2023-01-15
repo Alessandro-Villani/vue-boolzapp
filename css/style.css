@@ -117,6 +117,16 @@ footer{
 
     /*# CHAT SECTION */
 
+    #chat .header-right{
+        position: relative;
+    }
+
+    #chat .header-right .popup{
+        position: absolute;
+        top: 30px;
+        right: 15px;
+    }
+
     .chat-content{
         height: calc(90vh - 160px);
         background-image: url(../img/mine.jpg);

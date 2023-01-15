@@ -7,7 +7,8 @@ const app = Vue.createApp({
             currentIndex: 0,
             newMessage: '',
             searchField: '',
-            lastSeen: ''
+            lastSeen: '',
+            optionMenu: false
            }
     },
     methods:{
@@ -15,7 +16,10 @@ const app = Vue.createApp({
             console.log('click')
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
+            /*TODO display the correct last seen after deleting*/
+            if (this.dateToHours(this.currentIndex)){
             this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+            }
         },
         isSent(i){
             return this.data.contacts[this.currentIndex].messages[i].status === 'sent'
@@ -65,6 +69,10 @@ const app = Vue.createApp({
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
             this.toggleDropdown(i);
         },
+        deleteAllMessages(){
+            this.data.contacts[this.currentIndex].messages = [];
+            this.toggleOptionMenu();
+        },
         filteredNames(){
             this.data.contacts.forEach(contact => {
                contact.visible = contact.name.toLowerCase().includes(this.searchField.toLowerCase())
@@ -86,6 +94,9 @@ const app = Vue.createApp({
         },
         getDate(i){
             return this.data.contacts[i].messages.length > 0 ? this.data.contacts[i].messages[this.data.contacts[i].messages.length - 1].date : ''
+        },
+        toggleOptionMenu(){
+            this.optionMenu = !this.optionMenu;
         }
         
     },
