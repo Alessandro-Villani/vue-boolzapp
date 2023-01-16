@@ -20,11 +20,7 @@ const app = Vue.createApp({
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
             /*TODO display the correct last seen after deleting*/
-            if (this.dateToHours(this.currentIndex)){
-            this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
-            } else {
-                this.lastSeen = '';
-            }
+            this.getLastSeen();
         },
         isSent(i){
             return this.data.contacts[this.currentIndex].messages[i].status === 'sent'
@@ -84,10 +80,12 @@ const app = Vue.createApp({
         deleteMessage(i){
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
             this.closeDropdown();
+            this.getLastSeen();
         },
         deleteAllMessages(){
             this.data.contacts[this.currentIndex].messages = [];
             this.toggleOptionMenu();
+            this.getLastSeen();
         },
         filteredNames(){
             this.data.contacts.forEach(contact => {
@@ -95,8 +93,8 @@ const app = Vue.createApp({
             })
         },
         dateToHours(index){
-            if (this.data.contacts[index].messages.length > 0){
-            const actualDate = this.data.contacts[index].messages[this.data.contacts[index].messages.length - 1].date;
+            if (this.getLastReceivedMessageDate(index)){
+            const actualDate = this.getLastReceivedMessageDate(index);
             console.log(typeof(actualDate));
             const splitDate = actualDate.split(' ');
             console.log(splitDate);
@@ -111,15 +109,31 @@ const app = Vue.createApp({
         getDate(i){
             return this.data.contacts[i].messages.length > 0 ? this.data.contacts[i].messages[this.data.contacts[i].messages.length - 1].date : ''
         },
+        getLastReceivedMessageDate(i){
+            let lastReceivedDate = '';
+            this.data.contacts[i].messages.forEach((message) => {
+                if (message.status === 'received'){
+                lastReceivedDate =  message.date;
+                }
+            })
+            return lastReceivedDate;
+        },
         toggleOptionMenu(){
             this.optionMenu = !this.optionMenu;
             this.closeDropdown();
             console.log(this.optionMenu);
+        },
+        getLastSeen(){
+            if (this.dateToHours(this.currentIndex)){
+                this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+                } else {
+                    this.lastSeen = '';
+                }
         }
         
     },
     mounted() {
-        this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+        this.getLastSeen();
     }
 });
 
