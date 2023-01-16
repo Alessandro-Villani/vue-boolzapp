@@ -84,7 +84,7 @@
                         <div class="header-right">
                             <button class="border-0 me-3"><i class="fa-solid fa-magnifying-glass"></i></button>
                             <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
-                            <button class="border-0 me-3"><i class="fa-solid fa-ellipsis-vertical" @click="toggleOptionMenu" ></i></button>
+                            <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                             <div v-if="optionMenu" class="popup rounded-2 text-center shadow">
                                 <p class="p-3 m-0 rounded-2" @click="deleteAllMessages">DELETE CHAT</p>
                             </div>
@@ -106,7 +106,7 @@
                     <!--# CHAT FOOTER -->
                     <footer class="d-flex justify-content-around align-items-center px-3">
                         <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
-                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage">
+                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage" @click="closeDropdown">
                         <button class="border-0">
                             <i v-if="newMessage" class="fa-regular fa-paper-plane" @click="sendMessage"></i>
                             <i v-else class="fa-solid fa-microphone"></i>

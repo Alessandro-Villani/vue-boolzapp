@@ -8,17 +8,22 @@ const app = Vue.createApp({
             newMessage: '',
             searchField: '',
             lastSeen: '',
+            dropdownId: '',
             optionMenu: false
            }
     },
     methods:{
         selectContact(i){
-            console.log('click')
+            console.log('click');
+            this.optionMenu = false;
+            this.closeDropdown();
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
             /*TODO display the correct last seen after deleting*/
             if (this.dateToHours(this.currentIndex)){
             this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+            } else {
+                this.lastSeen = '';
             }
         },
         isSent(i){
@@ -59,15 +64,26 @@ const app = Vue.createApp({
             
         },
         toggleDropdown(i){
+            this.optionMenu = false;
+            this.closeDropdown();
             const id = `dropdown_${i}`;
+            this.dropdownId = id;
             console.log(id);
             const dropDown = document.getElementById(id);
             console.log(dropDown);
             dropDown.classList.toggle('d-none');
         },
+        closeDropdown(){
+            console.log(this.dropdownId);
+            if (this.dropdownId){
+                const dropDown = document.getElementById(this.dropdownId);
+                dropDown.classList.add('d-none');
+                this.dropdownId = '';
+            } 
+        },
         deleteMessage(i){
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
-            this.toggleDropdown(i);
+            this.closeDropdown();
         },
         deleteAllMessages(){
             this.data.contacts[this.currentIndex].messages = [];
@@ -97,6 +113,8 @@ const app = Vue.createApp({
         },
         toggleOptionMenu(){
             this.optionMenu = !this.optionMenu;
+            this.closeDropdown();
+            console.log(this.optionMenu);
         }
         
     },
