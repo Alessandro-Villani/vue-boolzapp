@@ -74,17 +74,20 @@
                 <section id="chat" class="col-7 ">
                     <!--# CHAT HEADER -->
                     <header class="d-flex align-items-center justify-content-between px-2">
-                        <div class="header-left d-flex">
+                        <!--+ HEADER LEFT -->
+                        <div class="header-left d-flex me-5">
                             <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="data.contacts[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
                                 <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
                                 <p class="mb-0">{{ lastSeen }}</p>
                             </div>
                         </div>
-                        <div class="header-right">
-                            <button class="border-0 me-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <!--+ HEADER RIGHT -->
+                        <div class="header-right d-flex justify-content-end flex-grow-1">
+                            <input v-if="searchMessage" class="form-control me-2" type="text" placeholder="Cerca nei messaggi" v-model.trim="searchMessageField">
+                            <button class="border-0 me-3" @click="toggleSearchMessage"><i class="fa-solid fa-magnifying-glass" :class="{ 'active' : searchMessage }"></i></button>
                             <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
-                            <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                            <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical" :class="{ 'active' : optionMenu }"></i></button>
                             <div v-if="optionMenu" class="popup rounded-2 text-center shadow">
                                 <p class="p-3 m-0 rounded-2" @click="deleteAllMessages">DELETE CHAT</p>
                             </div>

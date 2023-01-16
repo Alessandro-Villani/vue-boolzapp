@@ -121,6 +121,11 @@ footer{
         position: relative;
     }
 
+    #chat .header-right .active{
+        color: black;
+        font-weight: bolder;
+    }
+
     #chat .header-right .popup{
         position: absolute;
         top: 30px;

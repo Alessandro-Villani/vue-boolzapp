@@ -7,7 +7,10 @@ const app = Vue.createApp({
             currentIndex: 0,
             newMessage: '',
             searchField: '',
+            searchMessageField: '',
+            searchMessage: false,
             lastSeen: '',
+            previousDropdownId: '',
             dropdownId: '',
             optionMenu: false
            }
@@ -19,7 +22,6 @@ const app = Vue.createApp({
             this.closeDropdown();
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
-            /*TODO display the correct last seen after deleting*/
             this.getLastSeen();
         },
         isSent(i){
@@ -61,20 +63,20 @@ const app = Vue.createApp({
         },
         toggleDropdown(i){
             this.optionMenu = false;
-            this.closeDropdown();
+            this.previousDropdownId = this.dropdownId;
             const id = `dropdown_${i}`;
             this.dropdownId = id;
-            console.log(id);
+            if (this.dropdownId !== this.previousDropdownId){
+                this.closeDropdown(this.previousDropdownId);
+            }
             const dropDown = document.getElementById(id);
-            console.log(dropDown);
             dropDown.classList.toggle('d-none');
         },
-        closeDropdown(){
-            console.log(this.dropdownId);
-            if (this.dropdownId){
-                const dropDown = document.getElementById(this.dropdownId);
+        closeDropdown(id = this.dropdownId){
+            if (id){
+                const dropDown = document.getElementById(id);
                 dropDown.classList.add('d-none');
-                this.dropdownId = '';
+                id = '';
             } 
         },
         deleteMessage(i){
@@ -129,6 +131,9 @@ const app = Vue.createApp({
                 } else {
                     this.lastSeen = '';
                 }
+        },
+        toggleSearchMessage(){
+            this.searchMessage = !this.searchMessage;
         }
         
     },
