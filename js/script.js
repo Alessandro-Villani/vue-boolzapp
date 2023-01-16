@@ -4,15 +4,16 @@ const app = Vue.createApp({
     data(){
         return{
             data,
-            currentIndex: 0,
+            currentIndex: undefined,
             newMessage: '',
             searchField: '',
             searchMessageField: '',
-            searchMessage: false,
+            searchMessages: false,
             lastSeen: '',
             previousDropdownId: '',
             dropdownId: '',
-            optionMenu: false
+            optionMenu: false,
+            switchVisibility: false
            }
     },
     computed: {
@@ -30,6 +31,9 @@ const app = Vue.createApp({
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
             this.getLastSeen();
+            if(window.innerWidth < 1200){
+            this.toggleChat();
+            }
         },
         isSent(i){
             return this.filteredMessages[i].status === 'sent'
@@ -141,8 +145,13 @@ const app = Vue.createApp({
                     this.lastSeen = '';
                 }
         },
-        toggleSearchMessage(){
-            this.searchMessage = !this.searchMessage;
+        toggleSearchMessages(){
+            this.searchMessages = !this.searchMessages;
+            if(this.searchMessages){
+                this.$nextTick(() => {
+                    this.$refs.searchMessagesInput.focus();
+                });
+            }
             this.closeDropdowns();
         },
         getFilteredMessageId(i){
@@ -154,6 +163,12 @@ const app = Vue.createApp({
         closeDropdowns(){
             this.optionMenu = false;
             this.closeDropdown();
+        },
+        toggleChat(){
+            this.switchVisibility = !this.switchVisibility;
+            if(this.switchVisibility){
+                this.currentIndex = undefined;
+            }
         }
         
     },

@@ -19,7 +19,6 @@
 
 body{
     height: 100vh;
-    padding-top: 5vh;
     background-image: linear-gradient(var(--background-secondary) 15%, var(--background-main) 15%, var(--background-main));
 }
 
@@ -28,8 +27,22 @@ i[class^="fa"]{
 }
 
 header i[class^="fa"], footer i[class^="fa"]{
-    font-size: 25px;
-}    
+    font-size: calc(20px + 0.5vw);
+    transition: all 0.5s;
+}
+
+header button:hover i[class^="fa"], footer button:hover i[class^="fa"]{
+    color: black;
+    font-weight: bolder;
+}
+
+header .h5{
+    font-size: calc(14px + 0.5vh);
+}
+
+header span {
+    font-size: calc(12px + 0.2vh);
+}
 
 .rounded-img{
     width: 60px;
@@ -45,7 +58,7 @@ header i[class^="fa"], footer i[class^="fa"]{
 /*! MAIN */
 
 main{
-    height: 90vh;
+    height: 100vh;
 }
 
 main .input-group-text{
@@ -90,7 +103,7 @@ footer{
 
     .notifications i[class^="fa"]{
         color: var(--background-tertiary);
-        font-size: 25px;
+        font-size: calc(20px + 0.5vw);
     }
 
     .notification-text a{
@@ -132,8 +145,12 @@ footer{
         right: 15px;
     }
 
+    .search-message .form-control{
+        max-width: 50%;
+    }
+
     .chat-content{
-        height: calc(90vh - 160px);
+        height: calc(100vh - 160px);
         background-image: url(../img/mine.jpg);
         overflow-y: auto;
     }
@@ -188,6 +205,39 @@ footer{
     .popup p:hover{
         background-color: rgba(0, 0, 0, 0.2);
     }
+
+    #no-chat{
+        height: 100%;
+        background-image: url(../img/mine.jpg);
+        filter: invert(1);
+        color: black;
+    }
+
+    #no-chat h1{
+        font-size: 80px;
+    }
+
+    #no-chat i{
+        color: black;
+        font-size: 100px;
+    }
+
+/*! MEDIA QUERY */
+
+@media screen and (min-width: 1200px) {
+    main{
+        height: 90vh;
+    }
+    body{
+        padding-top: 5vh;;
+    }
+    .chat-content{
+        height: calc(90vh - 160px);
+    }
+    .search-message .form-control{
+        max-width: 100%;
+    }
+}
 
 
 

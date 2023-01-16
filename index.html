@@ -18,11 +18,11 @@
     <title>Boolzapp</title>
 </head>
 <body>
-    <main id="root" class="container">
+    <main id="root" class="container-fluid container-xl px-0">
         <div class="row g-0 h-100 shadow">
 
                 <!--! SIDEBAR -->
-                <nav id="sidebar" class="col-5 h-100">
+                <nav id="sidebar" class="col-12 col-xl-5 d-xl-block" :class="switchVisibility ? 'd-block' : 'd-none'">
                     <!--# SIDEBAR TOP -->
                     <div id="sidebar-top">
                         <!--+ HEADER -->
@@ -71,11 +71,12 @@
                 </nav>
 
                 <!--! CHAT SECTION -->
-                <section id="chat" class="col-7 ">
+                <section v-if="currentIndex >= 0" id="chat" class="col-xl-7 col-12 d-xl-block" :class="switchVisibility ? 'd-none' : 'd-block'">
                     <!--# CHAT HEADER -->
                     <header class="d-flex align-items-center justify-content-between px-2">
                         <!--+ HEADER LEFT -->
                         <div class="header-left d-flex me-5">
+                            <button class="border-0 me-3 d-xl-none" @click="toggleChat"><i class="fa-solid fa-arrow-left"></i></button>                            
                             <img class="rounded-img me-2" :src="'img/avatar' + data.contacts[currentIndex].avatar + '.jpg'" alt="data.contacts[currentIndex].name">
                             <div class="user-info d-flex flex-column justify-content-center">
                                 <p class="mb-0 h5">{{ data.contacts[currentIndex].name }}</p>
@@ -83,13 +84,17 @@
                             </div>
                         </div>
                         <!--+ HEADER RIGHT -->
-                        <div class="header-right d-flex justify-content-end flex-grow-1">
-                            <input v-if="searchMessage" class="form-control me-2" type="text" placeholder="Cerca nei messaggi" v-model.trim="searchMessageField" @click="closeDropdowns">
-                            <button class="border-0 me-3" @click="toggleSearchMessage"><i class="fa-solid fa-magnifying-glass" :class="{ 'active' : searchMessage }"></i></button>
-                            <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
-                            <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical" :class="{ 'active' : optionMenu }"></i></button>
-                            <div v-if="optionMenu" class="popup rounded-2 text-center shadow">
-                                <p class="p-3 m-0 rounded-2" @click="deleteAllMessages">DELETE CHAT</p>
+                        <div class="header-right d-flex flex-column-reverse flex-xl-row justify-content-end align-items-xl-center flex-grow-1">
+                            <div class="search-message mt-1 mb-1 mt-xl-0 me-xl-3 d-flex justify-content-end">
+                                <input ref="searchMessagesInput" v-if="searchMessages" class="form-control me-2" type="text" placeholder="Cerca nei messaggi" v-model.trim="searchMessageField" @click="closeDropdowns">
+                            </div>
+                            <div class="buttons text-end flex-shrink-0">
+                                <button class="border-0 me-3" @click="toggleSearchMessages"><i class="fa-solid fa-magnifying-glass" :class="{ 'active' : searchMessages }"></i></button>
+                                <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
+                                <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical" :class="{ 'active' : optionMenu }"></i></button>
+                                <div v-if="optionMenu" class="popup rounded-2 text-center shadow">
+                                    <p class="p-3 m-0 rounded-2" @click="deleteAllMessages">DELETE CHAT</p>
+                                </div>
                             </div>
                         </div>
                     </header>
@@ -109,12 +114,16 @@
                     <!--# CHAT FOOTER -->
                     <footer class="d-flex justify-content-around align-items-center px-3">
                         <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
-                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage" @click="closeDropdowns">
+                        <input class="form-control form-control-xl me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage" @click="closeDropdowns">
                         <button class="border-0">
                             <i v-if="newMessage" class="fa-regular fa-paper-plane" @click="sendMessage"></i>
                             <i v-else class="fa-solid fa-microphone"></i>
                         </button>
                     </footer>
+                </section>
+                <section v-else id="no-chat" class="col-xl-7 col-12 d-xl-flex flex-column justify-content-center align-items-center" :class="switchVisibility ? 'd-none' : 'd-flex'">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h1>Boolzapp</h1>
                 </section>
         </div>
     </main>
