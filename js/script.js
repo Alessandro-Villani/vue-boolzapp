@@ -13,7 +13,7 @@ const app = Vue.createApp({
             previousDropdownId: '',
             dropdownId: '',
             optionMenu: false,
-            switchVisibility: false
+            switchVisibility: true
            }
     },
     computed: {
@@ -22,7 +22,7 @@ const app = Vue.createApp({
                 message.id = i;
                 return message.text.toLowerCase().includes(this.searchMessageField.toLowerCase());
             })
-        }
+        },
     },
     methods:{
         selectContact(i){
@@ -32,7 +32,9 @@ const app = Vue.createApp({
             this.scrollToBottom(this.$refs.chat, 0); 
             this.getLastSeen();
             if(window.innerWidth < 1200){
-            this.toggleChat();
+                this.toggleChat();
+            } else {
+                this.switchVisibility = false;
             }
         },
         isSent(i){
