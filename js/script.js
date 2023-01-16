@@ -15,17 +15,24 @@ const app = Vue.createApp({
             optionMenu: false
            }
     },
+    computed: {
+        filteredMessages(){
+            return this.data.contacts[this.currentIndex].messages.filter((message, i) =>{
+                message.id = i;
+                return message.text.toLowerCase().includes(this.searchMessageField.toLowerCase());
+            })
+        }
+    },
     methods:{
         selectContact(i){
             console.log('click');
-            this.optionMenu = false;
-            this.closeDropdown();
+            this.closeDropdowns();
             this.currentIndex = i;
             this.scrollToBottom(this.$refs.chat, 0);
             this.getLastSeen();
         },
         isSent(i){
-            return this.data.contacts[this.currentIndex].messages[i].status === 'sent'
+            return this.filteredMessages[i].status === 'sent'
         },
         sendMessage(){
             console.log('enter');
@@ -77,9 +84,11 @@ const app = Vue.createApp({
                 const dropDown = document.getElementById(id);
                 dropDown.classList.add('d-none');
                 id = '';
+                this.dropdownId = '';
             } 
         },
         deleteMessage(i){
+            console.log('id' + i);
             this.data.contacts[this.currentIndex].messages.splice(i, 1);
             this.closeDropdown();
             this.getLastSeen();
@@ -134,6 +143,17 @@ const app = Vue.createApp({
         },
         toggleSearchMessage(){
             this.searchMessage = !this.searchMessage;
+            this.closeDropdowns();
+        },
+        getFilteredMessageId(i){
+            const filteredArray = this.filteredMessages;
+            console.log(filteredArray);
+            console.log("filteredArray id " + filteredArray[i].id);
+            return filteredArray[i].id;
+        },
+        closeDropdowns(){
+            this.optionMenu = false;
+            this.closeDropdown();
         }
         
     },

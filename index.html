@@ -84,7 +84,7 @@
                         </div>
                         <!--+ HEADER RIGHT -->
                         <div class="header-right d-flex justify-content-end flex-grow-1">
-                            <input v-if="searchMessage" class="form-control me-2" type="text" placeholder="Cerca nei messaggi" v-model.trim="searchMessageField">
+                            <input v-if="searchMessage" class="form-control me-2" type="text" placeholder="Cerca nei messaggi" v-model.trim="searchMessageField" @click="closeDropdowns">
                             <button class="border-0 me-3" @click="toggleSearchMessage"><i class="fa-solid fa-magnifying-glass" :class="{ 'active' : searchMessage }"></i></button>
                             <button class="border-0 me-3"><i class="fa-solid fa-paperclip"></i></button>
                             <button class="border-0 me-3" @click="toggleOptionMenu"><i class="fa-solid fa-ellipsis-vertical" :class="{ 'active' : optionMenu }"></i></button>
@@ -95,12 +95,12 @@
                     </header>
                     <!--# CHAT -->
                     <div ref="chat" class="chat-content d-flex flex-column p-5">
-                        <div v-for="(message, i) in data.contacts[currentIndex].messages" class="message rounded-3 p-3 mb-2 mw-50 shadow" :class="isSent(i) ? 'user' : 'external'">
+                        <div v-for="(message, i) in filteredMessages" class="message rounded-3 p-3 mb-2 mw-50 shadow" :class="isSent(i) ? 'user' : 'external'">
                             <i class="fa-solid fa-chevron-down" @click="toggleDropdown(i)" ></i>
                             <p class="mb-1">{{ message.text }}</p>
                             <time class="float-end">{{ message.date }}</time>
                             <div :id="`dropdown_${i}`" class="popup rounded-2 text-center shadow d-none">
-                                <p class="p-3 m-0 rounded-top" @click="deleteMessage(i)" >DELETE MESSAGE</p>
+                                <p class="p-3 m-0 rounded-top" @click="deleteMessage(getFilteredMessageId(i))" >DELETE MESSAGE</p>
                                 <hr class="m-0">
                                 <p class="p-3 m-0 rounded-bottom">MESSAGE INFO</p>
                             </div>
@@ -109,7 +109,7 @@
                     <!--# CHAT FOOTER -->
                     <footer class="d-flex justify-content-around align-items-center px-3">
                         <button class="border-0 me-3"><i class="fa-regular fa-face-smile"></i></button>
-                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage" @click="closeDropdown">
+                        <input class="form-control form-control-lg me-3" type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage" @click="closeDropdowns">
                         <button class="border-0">
                             <i v-if="newMessage" class="fa-regular fa-paper-plane" @click="sendMessage"></i>
                             <i v-else class="fa-solid fa-microphone"></i>
