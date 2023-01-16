@@ -29,7 +29,7 @@ const app = Vue.createApp({
             console.log('click');
             this.closeDropdowns();
             this.currentIndex = i;
-            this.scrollToBottom(this.$refs.chat, 0);
+            this.scrollToBottom(this.$refs.chat, 0); 
             this.getLastSeen();
             if(window.innerWidth < 1200){
             this.toggleChat();
@@ -40,15 +40,17 @@ const app = Vue.createApp({
         },
         sendMessage(){
             console.log('enter');
-            const message = {
-                date: new Date().toLocaleString(),
-                text: this.newMessage,
-                status: 'sent'
+            if(this.newMessage){
+                const message = {
+                    date: new Date().toLocaleString(),
+                    text: this.newMessage,
+                    status: 'sent'
+                }
+                this.data.contacts[this.currentIndex].messages.push(message);
+                this.scrollToBottom(this.$refs.chat, 20);
+                this.receiveMessage();
+                this.clearMessageField();
             }
-            this.data.contacts[this.currentIndex].messages.push(message);
-            this.scrollToBottom(this.$refs.chat, 20);
-            this.receiveMessage();
-            this.clearMessageField();
         },
         receiveMessage(){
             this.lastSeen = 'Sta Scrivendo...'
@@ -67,10 +69,11 @@ const app = Vue.createApp({
             this.newMessage = '';
         },
         scrollToBottom(item, timeout){
-            setTimeout(() => {
-                item.scrollTop = item.scrollHeight;
-            }, timeout)
-            
+                if(item !== undefined){
+                setTimeout(() => {
+                    item.scrollTop = item.scrollHeight;
+                }, timeout)
+                }
         },
         toggleDropdown(i){
             this.optionMenu = false;
@@ -139,11 +142,13 @@ const app = Vue.createApp({
             console.log(this.optionMenu);
         },
         getLastSeen(){
-            if (this.dateToHours(this.currentIndex)){
-                this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
-                } else {
-                    this.lastSeen = '';
-                }
+            if(this.currentIndex !== undefined){
+                if (this.dateToHours(this.currentIndex)){
+                    this.lastSeen = `Ultimo accesso alle: ${this.dateToHours(this.currentIndex)}`
+                    } else {
+                        this.lastSeen = '';
+                    }
+            }
         },
         toggleSearchMessages(){
             this.searchMessages = !this.searchMessages;
