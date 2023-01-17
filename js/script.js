@@ -29,7 +29,9 @@ const app = Vue.createApp({
             console.log('click');
             this.closeDropdowns();
             this.currentIndex = i;
-            this.scrollToBottom(this.$refs.chat, 0); 
+            setTimeout(() => {
+                this.scrollToBottom(this.$refs.chat, 0); 
+            }, 20);            
             this.getLastSeen();
             if(window.innerWidth < 1200){
                 this.toggleChat();
